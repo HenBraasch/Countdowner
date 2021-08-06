@@ -3,7 +3,7 @@
     <div class="container">
         <h1 v-text="pageHeader"></h1>
         <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div v-for="(event, index) in events" :key="event.id" class="col">
+            <div v-for="(event, index) in $store.state.events" :key="event.id" class="col">
                 <EventItem 
                     :index="index" 
                     :event="event" 
@@ -16,7 +16,7 @@
                 >
                 </EventItem>
             </div>
-            <div v-if="events.length == 0">
+            <div v-if="$store.state.events.length == 0">
                 <p class="highlight">No events here. Start adding some!</p>
             </div>
         </div>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import eventData from '../assets/data.js';
 import EventItem from '../components/EventItem.vue';
 
 export default {
@@ -32,7 +31,6 @@ export default {
         return{
             name: 'EventList',
             pageHeader: "Upcoming events",
-            events: eventData,
             selectionIndex: -1,
             hover: -1
         }
@@ -54,9 +52,6 @@ export default {
             } else{
                 this.hover = index
             }
-        },
-        removeEvent(item){
-            this.events = this.events.filter(event => event !== item)
         }
     }
 
