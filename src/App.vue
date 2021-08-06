@@ -23,6 +23,11 @@ export default {
     EventList,
     EventForm,
     Navigation
+  },
+  computed:{
+  },
+  async created(){
+    this.$store.dispatch('getEventsFromDB')
   }
 }
 
