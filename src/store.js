@@ -5,7 +5,8 @@ import axios from "axios";
 export default createStore({
     state(){
         return {
-            events: []
+            events: [],
+            heros:[]
         }
     },
     getters:{},
@@ -18,6 +19,9 @@ export default createStore({
         },
         addEvent(state, event){
             state.events.push(event)
+        },
+        setInitialHeros(state, heros){
+            state.heros = heros
         }
     },
     actions:{
@@ -25,7 +29,12 @@ export default createStore({
             await axios.get('data.json').then(response => {
                 commit('setInitialEvents', response.data)
             })
-        }
+        },
+        async getHerosFromDB({ commit }){
+            await axios.get('heroData.json').then(response => {
+                commit('setInitialHeros', response.data)
+            })
+        },
     },
     modules: {}
 })

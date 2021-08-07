@@ -27,7 +27,8 @@ export default {
   computed:{
   },
   async created(){
-    this.$store.dispatch('getEventsFromDB')
+    this.$store.dispatch('getEventsFromDB'),
+    this.$store.dispatch('getHerosFromDB')
   }
 }
 
