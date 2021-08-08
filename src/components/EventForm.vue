@@ -2,11 +2,20 @@
     <div class="container">
         <h1>New Event</h1>
         <form>
-            <input v-model="event.title" type="text"  placeholder="Add Title" maxlength="25"> ({{event.title.length}}/25 Words)
-            <div v-for="(hero) in $store.state.heros" :key="hero.id">
-                <img class="hero" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture = hero.url, selectedHero = hero">
+            <div class="form-group">
+                <input class="form-control" v-model="event.title" type="text"  placeholder="Add Title" maxlength="25"> ({{event.title.length}}/25 Words)
+                <input class="form-control" type="date" v-model="event.date">
+                <div class="row">
+                    <div v-for="(hero) in $store.state.heros" :key="hero.id">
+                        <div class="col">
+                            <div class="card hero-card h-100">
+                                <img class="card-img-top hero" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture = hero.url, selectedHero = hero">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input class="form-control btn btn-primary" type="submit" @click.prevent="$store.commit('addEvent', event)">
             </div>
-            <input type="submit" @click.prevent="$store.commit('addEvent', event)">
         </form>
     </div>
 </template>
@@ -18,7 +27,7 @@ export default{
     data: function() {
         return{
             event:{
-                date: "2022-02-22",
+                date: "",
                 id: 5,
                 picture: "",
                 title: ""
@@ -39,7 +48,9 @@ export default{
      border: solid 2px green;
  }
  img.hero{
-     max-height: 150px;
+     max-width: 150px;
+ }
+ .hero-card{
      max-width: 150px;
  }
 </style>
