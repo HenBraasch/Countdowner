@@ -1,7 +1,7 @@
 <template>
     <div class="card h-100">
         <div class="img-container" @mouseenter="$emit('mouse-enter',index)" @mouseleave="$emit('mouse-leave',index)">
-            <img :src="event.picture" class="card-img-top event-img" alt="The card's image on top">
+            <img :src="event.picture_url" class="card-img-top event-img" alt="The card's image on top">
             <div v-if="hover == index" class="top-right" @click="$store.commit('removeEvent', event)">Delete</div>
         </div>
         <div class="card-body">
@@ -31,7 +31,7 @@
             event: {
                 title: String,
                 date: Date,
-                picture: String
+                picture_url: String
             },
             selectionIndex: Number,
             index: Number,
