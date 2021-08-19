@@ -26,7 +26,7 @@ export default createStore({
     },
     actions:{
         async getEventsFromDB({ commit }){
-            await axios.get('http://127.0.0.1:64450/?action=event.list').then(response => {
+            await axios.get('/events').then(response => {
                 commit('setInitialEvents', response.data)
             })
         },
