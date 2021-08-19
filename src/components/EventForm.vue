@@ -14,7 +14,7 @@
                         </div>
                     </div>
                 </div>
-                <input class="form-control btn btn-primary" type="submit" @click.prevent="$store.commit('addEvent', event)">
+                <input class="form-control btn btn-primary" type="submit" @click.prevent="$store.commit('addEvent', event), $store.dispatch('saveNewEvent', event)">
             </div>
         </form>
     </div>

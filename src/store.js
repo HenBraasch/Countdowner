@@ -26,7 +26,7 @@ export default createStore({
     },
     actions:{
         async getEventsFromDB({ commit }){
-            await axios.get('data.json').then(response => {
+            await axios.get('http://127.0.0.1:64450/?action=event.list').then(response => {
                 commit('setInitialEvents', response.data)
             })
         },
@@ -35,6 +35,16 @@ export default createStore({
                 commit('setInitialHeros', response.data)
             })
         },
+        async saveNewEvent( event ){
+            console.log( event)
+            await axios.post("http://127.0.0.1:64450/?action=event.add", event)
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+        }
     },
     modules: {}
 })
