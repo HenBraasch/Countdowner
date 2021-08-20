@@ -1,8 +1,14 @@
 <template>
-    <div class="card h-100">
-        <div class="img-container" @mouseenter="$emit('mouse-enter',index)" @mouseleave="$emit('mouse-leave',index)">
-            <img :src="event.picture_url" class="card-img-top event-img" alt="The card's image on top">
-            <div v-if="hover == index" class="top-right" @click="$store.commit('removeEvent', event)">Delete</div>
+    <div class="card h-100 border-0 shadow rounded-card">
+        <div class="card-img-top">
+            <div class="embed-responsive embed-responsive-4by3">
+                <div class="embed-responsive-item">
+                    <div class="img-container" @mouseenter="$emit('mouse-enter',index)" @mouseleave="$emit('mouse-leave',index)">
+                        <img :src="event.picture_url" class="w-100 rounded-img" alt="The card's image on top">
+                        <div v-if="hover == index" class="top-right remove-item" @click="$store.commit('removeEvent', event)">Delete</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <h4 class="card-title" v-text="event.title"></h4>
@@ -42,6 +48,17 @@
 
 <style>
 /* Container holding the image and the text */
+.remove-item{
+    cursor: pointer;
+}
+.rounded-card{
+    border-radius: 2%;
+}
+.rounded-img{
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+}
+
 .img-container{
     position: relative;
     text-align: center;
