@@ -9,27 +9,27 @@
                     <div v-for="(hero) in $store.state.heros" :key="hero.id">
                         <div class="col">
                             <div class="card hero-card h-100">
-                                <img class="card-img-top hero" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture = hero.url, selectedHero = hero">
+                                <img class="card-img-top hero" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture_url = hero.url, selectedHero = hero">
                             </div>
                         </div>
                     </div>
                 </div>
-                <input class="form-control btn btn-primary" type="submit" @click.prevent="$store.commit('addEvent', event), $store.dispatch('saveNewEvent', event)">
+                <input class="form-control btn btn-primary" type="submit" @click.prevent="$store.commit('addEvent', event), saveNewEvent()">
             </div>
         </form>
     </div>
 </template>
 
 <script>
-
+import countdownerAPI from '../api/countdowner.js'
 
 export default{
-    data: function() {
+    data() {
         return{
             event:{
                 date: "",
                 id: 5,
-                picture: "",
+                picture_url: "",
                 title: ""
             },
             selectedHero: {}
@@ -38,6 +38,19 @@ export default{
     methods:{
         selectHero(hero){
             this.$set(hero, 'selected', (hero.selected ? false : true))
+        },
+        sendToDB(){
+            var newEvent = []
+            newEvent[0] = this.event.title
+            newEvent[1] = this.event.date
+            newEvent[2] = this.event.picture_url
+            console.log("Before sending to store",newEvent)
+            this.$store.dispatch('saveNewEvent', newEvent)
+        },
+        async saveNewEvent( ){
+            console.log("The event in the store", this.event)
+
+            await countdownerAPI.saveNewEvent(this.event)
         }
     }
 }
