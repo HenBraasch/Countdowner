@@ -13,7 +13,7 @@ export default createStore({
     getters:{},
     mutations: {
         setInitialEvents(state, events){
-            state.events = events
+            state.events = events.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
         },
         removeEvent(state, item){
             state.events = state.events.filter(event => event !== item)
