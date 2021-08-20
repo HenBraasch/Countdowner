@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
-import axios from "axios";
+// import axios from "axios";
+import countdownerAPI from './api/countdowner.js'
 
 // Create a new store instance
 export default createStore({
@@ -26,24 +27,12 @@ export default createStore({
     },
     actions:{
         async getEventsFromDB({ commit }){
-            await axios.get('/events').then(response => {
-                commit('setInitialEvents', response.data)
-            })
+            const eventsData = await countdownerAPI.getEventsFromDB({})
+            commit('setInitialEvents', eventsData)
         },
         async getHerosFromDB({ commit }){
-            await axios.get('/pictures').then(response => {
-                commit('setInitialHeros', response.data)
-            })
-        },
-        async saveNewEvent( event ){
-            console.log( event)
-            await axios.post("events", event)
-            .then(function(response){
-                console.log(response)
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+            const pictures = await countdownerAPI.getHerosFromDB({})
+            commit('setInitialHeros', pictures)
         }
     },
     modules: {}
