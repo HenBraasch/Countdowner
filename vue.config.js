@@ -7,6 +7,11 @@ module.exports = {
                 changeOrigin: true,
                 logLevel: "debug",
                 target: 'http://127.0.0.1:64450/'
+            },
+            "^/pictures":{
+                changeOrigin: true,
+                logLevel: "debug",
+                target: 'http://127.0.0.1:64450/'
             }
         }
    }

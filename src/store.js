@@ -31,13 +31,13 @@ export default createStore({
             })
         },
         async getHerosFromDB({ commit }){
-            await axios.get('heroData.json').then(response => {
+            await axios.get('/pictures').then(response => {
                 commit('setInitialHeros', response.data)
             })
         },
         async saveNewEvent( event ){
             console.log( event)
-            await axios.post("http://127.0.0.1:64450/?action=event.add", event)
+            await axios.post("events", event)
             .then(function(response){
                 console.log(response)
             })
