@@ -15,6 +15,7 @@
                     @mouse-leave="updateHoverStatus(-1)"
                     @edit-title="updateSelectionTitleIndex(index)"
                     @event-updated="saveUpdatedEvent($store.state.events[index])"
+                    @remove-event="deleteEventFromDB($store.state.events[index])"
                 >
                 </EventItem>
             </div>
@@ -66,6 +67,9 @@ export default {
         },
         async saveUpdatedEvent( event ){
             await countdownerAPI.saveUpdatedEvent(event)
+        },
+        async deleteEventFromDB( event ){
+            await countdownerAPI.deleteEventFromDB(event)
         }
     },
     computed:{

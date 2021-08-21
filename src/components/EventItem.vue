@@ -5,7 +5,7 @@
                 <div class="embed-responsive-item">
                     <div class="img-container" @mouseenter="$emit('mouse-enter',index)" @mouseleave="$emit('mouse-leave',index)">
                         <img :src="event.picture_url" class="w-100 rounded-img" alt="The card's image on top">
-                        <div v-if="hover == index" class="top-right remove-item" @click="$store.commit('removeEvent', event)">Delete</div>
+                        <div v-if="hover == index" class="top-right remove-item" @click="$emit('remove-event', index), $store.commit('removeEvent', event)">Delete</div>
                     </div>
                 </div>
             </div>
