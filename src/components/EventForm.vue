@@ -39,17 +39,15 @@ export default{
         selectHero(hero){
             this.$set(hero, 'selected', (hero.selected ? false : true))
         },
-        sendToDB(){
-            var newEvent = []
-            newEvent[0] = this.event.title
-            newEvent[1] = this.event.date
-            newEvent[2] = this.event.picture_url
-            console.log("Before sending to store",newEvent)
-            this.$store.dispatch('saveNewEvent', newEvent)
-        },
+        // sendToDB(){
+        //     var newEvent = []
+        //     newEvent[0] = this.event.title
+        //     newEvent[1] = this.event.date
+        //     newEvent[2] = this.event.picture_url
+        //     console.log("Before sending to store",newEvent)
+        //     this.$store.dispatch('saveNewEvent', newEvent)
+        // },
         async saveNewEvent( ){
-            console.log("The event in the store", this.event)
-
             await countdownerAPI.saveNewEvent(this.event)
         }
     }
