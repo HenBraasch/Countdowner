@@ -1,0 +1,15 @@
+{
+    "background_color": "green",
+    "description": "Simple event countdown app",
+    "display": "fullscreen",
+    "icons":[
+        {
+            "src":"./public/countdowner.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "name": "Countdowner",
+    "short_name": "Countdowner",
+    "start_url": "./public/index.html"
+}
