@@ -11,7 +11,18 @@
             </div>
         </div>
         <div class="card-body">
-            <h4 class="card-title" v-text="event.title"></h4>
+            <h4 v-if="selectedTitleIndex != index" @dblclick="$emit('edit-title', index)" class="card-title event-title" v-text="event.title"></h4>
+            <div class=""  v-if="selectedTitleIndex == index">
+                <input type="text" class="card-title form-control" v-model="event.title"/>
+                <div class="btn-group" role="group">
+                <button class="btn btn-secondary btn-sm" 
+                    @click="$emit('edit-title', index)"
+                    > Cancel</button>
+                <button class="btn btn-primary btn-sm"
+                    @click="$emit('edit-title', index), $emit('event-updated', index)"
+                    >Save</button>
+                </div>
+            </div>
             <p v-if="selectionIndex == index" @click="$emit('show-date', index)" class="card-text" v-text="formatDate(event.date)"></p>
             <p v-else @click="$emit('show-date', index)" class="card-text" v-text="getDaysTo(event.date)"></p>
         </div>
@@ -40,6 +51,7 @@
                 picture_url: String
             },
             selectionIndex: Number,
+            selectedTitleIndex: Number,
             index: Number,
             hover: Number
         }
@@ -48,7 +60,7 @@
 
 <style>
 /* Container holding the image and the text */
-.remove-item{
+.remove-item, .event-title{
     cursor: pointer;
 }
 .rounded-card{
