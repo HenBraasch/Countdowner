@@ -14,7 +14,7 @@ export default createStore({
     mutations: {
         setInitialEvents(state, events){
             const eventMap = events.map(function(x) {
-               x.date = Date.parse(x.date)
+               x.date = new Date(Date.parse(x.date))
                return x
             })
             
