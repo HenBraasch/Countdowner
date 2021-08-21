@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 
 const getEventsFromDB = async() => {
     let response = {}
@@ -25,8 +24,18 @@ const saveNewEvent = async(newEvent) => {
     return response.data
 }
 
+const saveUpdatedEvent = async(updatedEvent) => {
+    let response = {}
+    const event = JSON.parse(JSON.stringify(updatedEvent))
+    let url = "/events/" + updatedEvent.id
+    response =  await axios.patch(url, updatedEvent)
+
+    return response.data
+}
+
 export default{
     getEventsFromDB,
     getHerosFromDB,
-    saveNewEvent
+    saveNewEvent,
+    saveUpdatedEvent
 }
