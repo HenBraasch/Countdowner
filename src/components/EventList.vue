@@ -3,7 +3,7 @@
     <div class="container">
         <h1 v-text="pageHeader"></h1>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <div v-for="(event, index) in $store.state.events" :key="event.id" class="col">
+            <div v-for="(event, index) in sortedEventList" :key="event.id" class="col">
                 <EventItem 
                     :index="index" 
                     :event="event" 
@@ -66,6 +66,11 @@ export default {
         },
         async saveUpdatedEvent( event ){
             await countdownerAPI.saveUpdatedEvent(event)
+        }
+    },
+    computed:{
+        sortedEventList(){
+            return this.$store.state.events.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
         }
     }
 
