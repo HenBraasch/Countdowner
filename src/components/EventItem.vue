@@ -1,5 +1,5 @@
 <template>
-    <div class="card h-100 border-0 shadow rounded-card">
+    <div class="card h-100 border-0 shadow rounded-card w-100">
         <div class="card-img-top">
             <div class="embed-responsive embed-responsive-4by3">
                 <div class="embed-responsive-item">
