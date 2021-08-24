@@ -66,7 +66,9 @@ div.hero-gallery {
   background-color:white;
   overflow-x: scroll;
   white-space: nowrap;
-  height: 250px
+  height: 250px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 div.hero-gallery::-webkit-scrollbar{
