@@ -4,9 +4,7 @@
   <transition name=fade>
     <EventForm v-if="isFormOpen" :isOpen="isFormOpen" @eventAdded="isFormOpen = false"></EventForm>
   </transition>
-  <transition name="fade-list">
     <EventList v-if="!isFormOpen"/>
-  </transition>
 </div>
 </template>
 
