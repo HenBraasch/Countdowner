@@ -1,8 +1,10 @@
 <template>
 <div>
   <Navigation :isOpen="isFormOpen" @new-event="isFormOpen=true" @close-new-event="isFormOpen=false"></Navigation>
-  <EventForm v-if="isFormOpen"></EventForm>
-  <EventList />
+  <transition name=fade>
+    <EventForm v-if="isFormOpen" :isOpen="isFormOpen" @eventAdded="isFormOpen = false"></EventForm>
+  </transition>
+    <EventList v-if="!isFormOpen"/>
 </div>
 </template>
 
@@ -35,4 +37,16 @@ export default {
 </script>
 
 <style>
+.fade-enter-active{
+  transition: all 0.1s linear;
+}
+.fade-leave-active{
+  transition: all 0.1s linear;
+}
+
+.fade-enter-from {
+  transform: translateY(-150px);
+}
+
+
 </style>

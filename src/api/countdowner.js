@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 
 const getEventsFromDB = async() => {
     let response = {}
@@ -25,8 +24,29 @@ const saveNewEvent = async(newEvent) => {
     return response.data
 }
 
+const saveUpdatedEvent = async(updatedEvent) => {
+    let response = {}
+    let url = "/events/" + updatedEvent.id
+    response =  await axios.patch(url, updatedEvent)
+
+    return response.data
+}
+
+/**
+ * Deletes an event from the database
+ */
+const deleteEventFromDB = async(event) => {
+    let response = {}
+    let url = "/events/" + event.id
+
+    response = await axios.delete(url)
+    return response.data
+}
+
 export default{
     getEventsFromDB,
     getHerosFromDB,
-    saveNewEvent
+    saveNewEvent,
+    saveUpdatedEvent,
+    deleteEventFromDB
 }

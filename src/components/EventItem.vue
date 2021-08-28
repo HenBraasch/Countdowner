@@ -1,17 +1,28 @@
 <template>
-    <div class="card h-100 border-0 shadow rounded-card">
+    <div class="card h-100 border-0 shadow rounded-card w-100">
         <div class="card-img-top">
             <div class="embed-responsive embed-responsive-4by3">
                 <div class="embed-responsive-item">
                     <div class="img-container" @mouseenter="$emit('mouse-enter',index)" @mouseleave="$emit('mouse-leave',index)">
                         <img :src="event.picture_url" class="w-100 rounded-img" alt="The card's image on top">
-                        <div v-if="hover == index" class="top-right remove-item" @click="$store.commit('removeEvent', event)">Delete</div>
+                        <div v-if="hover == index" class="top-right remove-item" @click="$emit('remove-event', index), $store.commit('removeEvent', event)">Delete</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <h4 class="card-title" v-text="event.title"></h4>
+            <h4 v-if="selectedTitleIndex != index" @dblclick="$emit('edit-title', index)" class="card-title event-title" v-text="event.title"></h4>
+            <div class=""  v-if="selectedTitleIndex == index">
+                <input type="text" class="card-title form-control" v-model="event.title"/>
+                <div class="btn-group" role="group">
+                <button class="btn btn-secondary btn-sm" 
+                    @click="$emit('edit-title', index)"
+                    > Cancel</button>
+                <button class="btn btn-primary btn-sm"
+                    @click="$emit('edit-title', index), $emit('event-updated', index)"
+                    >Save</button>
+                </div>
+            </div>
             <p v-if="selectionIndex == index" @click="$emit('show-date', index)" class="card-text" v-text="formatDate(event.date)"></p>
             <p v-else @click="$emit('show-date', index)" class="card-text" v-text="getDaysTo(event.date)"></p>
         </div>
@@ -40,6 +51,7 @@
                 picture_url: String
             },
             selectionIndex: Number,
+            selectedTitleIndex: Number,
             index: Number,
             hover: Number
         }
@@ -48,7 +60,7 @@
 
 <style>
 /* Container holding the image and the text */
-.remove-item{
+.remove-item, .event-title{
     cursor: pointer;
 }
 .rounded-card{

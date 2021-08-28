@@ -9,10 +9,13 @@
                     :event="event" 
                     :selectionIndex="selectionIndex"
                     :hover="hover"
+                    :selectedTitleIndex="selectedTitleIndex"
                     @show-date="updateSelectionIndex(index)"
                     @mouse-enter="updateHoverStatus(index)"
                     @mouse-leave="updateHoverStatus(-1)"
-                    @remove="removeEvent(event)"
+                    @edit-title="updateSelectionTitleIndex(index)"
+                    @event-updated="saveUpdatedEvent($store.state.events[index])"
+                    @remove-event="deleteEventFromDB($store.state.events[index])"
                 >
                 </EventItem>
             </div>
@@ -25,6 +28,7 @@
 
 <script>
 import EventItem from '../components/EventItem.vue';
+import countdownerAPI from '../api/countdowner.js';
 
 export default {
     data: function(){
@@ -32,7 +36,8 @@ export default {
             name: 'EventList',
             pageHeader: "Upcoming events",
             selectionIndex: -1,
-            hover: -1
+            hover: -1,
+            selectedTitleIndex: -1
         }
     },
     components:{
@@ -46,13 +51,28 @@ export default {
                 this.selectionIndex = -1
             }
         },
+        updateSelectionTitleIndex(index){
+            if(this.selectedTitleIndex == -1 || this.selectedTitleIndex != index){
+                this.selectedTitleIndex = index
+            } else{
+                this.selectedTitleIndex = -1
+            }
+        },
         updateHoverStatus(index){
             if(this.hover == index){
                 this.hover = -1
             } else{
                 this.hover = index
             }
+        },
+        async saveUpdatedEvent( event ){
+            await countdownerAPI.saveUpdatedEvent(event)
+        },
+        async deleteEventFromDB( event ){
+            await countdownerAPI.deleteEventFromDB(event)
         }
+    },
+    computed:{
     }
 
 };
