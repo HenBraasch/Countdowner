@@ -1,3 +1,4 @@
+const SWPrecache = require('sw-precache-webpack-plugin')
 module.exports = {
     lintOnSave: true,
     publicPath: process.env.NODE_ENV === 'production' ? '':'/',
