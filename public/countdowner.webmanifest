@@ -2,7 +2,7 @@
     "name": "Countdowner",
     "short_name": "Countdowner",
     "start_url": "./public/index.html",
-    "background_color": "green",
+    "background_color": "white",
     "theme_color": "#0476F2",
     "description": "Simple event countdown app",
     "display": "fullscreen",
