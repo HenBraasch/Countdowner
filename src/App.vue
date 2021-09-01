@@ -48,5 +48,4 @@ export default {
   transform: translateY(-150px);
 }
 
-
 </style>
