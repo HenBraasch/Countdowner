@@ -3,7 +3,7 @@ import axios from 'axios'
 const getEventsFromDB = async() => {
     let response = {}
 
-    response = await axios.get('/events')
+    response = await axios.get('https://sheltered-savannah-62191.herokuapp.com/events')
     
     return response.data
 }
@@ -11,7 +11,7 @@ const getEventsFromDB = async() => {
 const getHerosFromDB = async() => {
     let response = {}
 
-    response = await axios.get('/pictures')
+    response = await axios.get('https://sheltered-savannah-62191.herokuapp.com/pictures')
 
     return response.data
 }
@@ -19,14 +19,14 @@ const getHerosFromDB = async() => {
 const saveNewEvent = async(newEvent) => {
     let response = {}
 
-    response =  await axios.post("/events", newEvent)
+    response =  await axios.post("https://sheltered-savannah-62191.herokuapp.com/events", newEvent)
 
     return response.data
 }
 
 const saveUpdatedEvent = async(updatedEvent) => {
     let response = {}
-    let url = "/events/" + updatedEvent.id
+    let url = "https://sheltered-savannah-62191.herokuapp.com/events/" + updatedEvent.id
     response =  await axios.patch(url, updatedEvent)
 
     return response.data
