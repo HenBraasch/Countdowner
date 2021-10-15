@@ -3,7 +3,7 @@ import axios from 'axios'
 const getEventsFromDB = async() => {
     let response = {}
 
-    response = await axios.get('https://sheltered-savannah-62191.herokuapp.com/events')
+    response = await axios.get('https://sheltered-savannah-62191.herokuapp.com/events/')
     
     return response.data
 }
@@ -11,7 +11,7 @@ const getEventsFromDB = async() => {
 const getHerosFromDB = async() => {
     let response = {}
 
-    response = await axios.get('https://sheltered-savannah-62191.herokuapp.com/pictures')
+    response = await axios.get('https://sheltered-savannah-62191.herokuapp.com/pictures/')
 
     return response.data
 }
@@ -19,7 +19,7 @@ const getHerosFromDB = async() => {
 const saveNewEvent = async(newEvent) => {
     let response = {}
 
-    response =  await axios.post("https://sheltered-savannah-62191.herokuapp.com/events", newEvent)
+    response =  await axios.post("https://sheltered-savannah-62191.herokuapp.com/events/", newEvent)
 
     return response.data
 }
@@ -37,7 +37,7 @@ const saveUpdatedEvent = async(updatedEvent) => {
  */
 const deleteEventFromDB = async(event) => {
     let response = {}
-    let url = "/events/" + event.id
+    let url = "https://sheltered-savannah-62191.herokuapp.com/events/" + event.id
 
     response = await axios.delete(url)
     return response.data
