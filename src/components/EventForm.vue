@@ -3,15 +3,15 @@
         <h1>New Event</h1>
         <form class="event-form" >
             <div class="form-group">
-                <input class="form-control" v-model="event.title" type="text"  placeholder="Add Title" maxlength="25" required> ({{event.title.length}}/25 Words)
-                <input class="form-control" type="date" v-model="event.date" required>
+                <input class="form-control" v-model="event.title" type="text"  placeholder="Add Title" maxlength="25"> ({{event.title.length}}/25 Words)
+                <input class="form-control" type="date" v-model="event.date">
                 
                 <div class="container">
                     <div class="hero-gallery">
                         <img  v-for="(hero) in $store.state.heros" :key="hero.id" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture_url = hero.url, selectedHero = hero">
                     </div>
                 </div>
-                <input class="form-control btn btn-primary" type="submit" :disabled="!event.picture_url.length" @click.prevent="$emit('eventAdded'),$store.commit('addEvent', event), saveNewEvent()">
+                <input class="form-control btn btn-primary" type="submit" :disabled="!isValidForm" @click.prevent="$emit('eventAdded'),$store.commit('addEvent', event), saveNewEvent()">
             </div>
         </form>
     </div>
@@ -38,6 +38,15 @@ export default{
         },
         async saveNewEvent( ){
             await countdownerAPI.saveNewEvent(this.event)
+        }
+    },
+    computed:{
+        isValidForm(){
+            let isValid = false
+            if(this.event.title.length && this.event.date.length && this.event.picture_url){
+                isValid = true
+            }
+            return isValid
         }
     }
 }
