@@ -7,11 +7,12 @@
                 <input class="form-control" type="date" v-model="event.date">
                 
                 <div class="container">
+                    <h5>Please choose a picture</h5>
                     <div class="hero-gallery">
                         <img  v-for="(hero) in $store.state.heros" :key="hero.id" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture_url = hero.url, selectedHero = hero">
                     </div>
                 </div>
-                <input class="form-control btn btn-primary" type="submit" @click.prevent="$emit('eventAdded'),$store.commit('addEvent', event), saveNewEvent()">
+                <input class="form-control btn btn-primary" type="submit" :disabled="!event.picture_url.length" @click.prevent="$emit('eventAdded'),$store.commit('addEvent', event), saveNewEvent()">
             </div>
         </form>
     </div>
@@ -25,7 +26,7 @@ export default{
         return{
             event:{
                 date: "",
-                id: 5,
+                id: 0,
                 picture_url: "",
                 title: ""
             },
