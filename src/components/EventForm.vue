@@ -3,8 +3,8 @@
         <h1>New Event</h1>
         <form class="event-form" >
             <div class="form-group">
-                <input class="form-control" v-model="event.title" type="text"  placeholder="Add Title" maxlength="25"> ({{event.title.length}}/25 Words)
-                <input class="form-control" type="date" v-model="event.date">
+                <input class="form-control" v-model="event.title" type="text"  placeholder="Add Title" maxlength="25" required> ({{event.title.length}}/25 Words)
+                <input class="form-control" type="date" v-model="event.date" required>
                 
                 <div class="container">
                     <div class="hero-gallery">
