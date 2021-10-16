@@ -7,7 +7,6 @@
                 <input class="form-control" type="date" v-model="event.date">
                 
                 <div class="container">
-                    <h5>Please choose a picture</h5>
                     <div class="hero-gallery">
                         <img  v-for="(hero) in $store.state.heros" :key="hero.id" :src=hero.url alt={{hero.title}} :class="{selected: hero.id == selectedHero.id}" @click="event.picture_url = hero.url, selectedHero = hero">
                     </div>
